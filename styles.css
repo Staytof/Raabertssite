@@ -1,3 +1,9 @@
+/* =========================================================
+   Raaberts Softwares — Folha de estilos
+   Estética monocromática preto e branco, moderna e minimalista.
+   ========================================================= */
+
+/* ---------- Tokens de design ---------- */
 :root {
   /* Paleta monocromática */
   --color-bg: #ffffff;
@@ -442,6 +448,14 @@ p {
   margin-bottom: var(--space-3);
 }
 
+.hero-title::after {
+  content: "|";
+  display: inline-block;
+  margin-left: 0.08em;
+  font-weight: 400;
+  animation: cursorBlink 900ms steps(1) infinite;
+}
+
 .hero-subtitle {
   font-size: 1.0625rem;
   color: var(--color-text-muted);
@@ -662,6 +676,10 @@ p {
   border-color: var(--color-accent-hover);
 }
 
+.cases-drag-hint {
+  display: none;
+}
+
 /* ---------- Contato ---------- */
 .contato-grid {
   display: grid;
@@ -839,6 +857,23 @@ p {
   }
 }
 
+@keyframes cursorBlink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes dragHint {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  45% {
+    transform: translateX(0.45rem);
+  }
+}
+
 /* ---------- Responsividade ---------- */
 @media (max-width: 960px) {
   .section-grid {
@@ -895,8 +930,103 @@ p {
     grid-template-columns: 1fr;
   }
 
+  #destaques .section-head {
+    margin-bottom: var(--space-4);
+  }
+
+  #destaques .section-title {
+    font-size: clamp(2rem, 9vw, 2.45rem);
+    line-height: 1.08;
+  }
+
   .cases {
-    grid-template-columns: 1fr;
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(11.5rem, 66vw);
+    gap: var(--space-3);
+    margin-right: calc(var(--space-3) * -1);
+    padding: 0 var(--space-3) 0.65rem 0;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: var(--space-3);
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: none;
+  }
+
+  .cases::-webkit-scrollbar {
+    display: none;
+  }
+
+  .case {
+    border-radius: var(--radius-md);
+    scroll-snap-align: start;
+  }
+
+  .case:hover {
+    transform: none;
+  }
+
+  .case-media {
+    padding: 0.95rem;
+  }
+
+  .case-body {
+    padding: 0.85rem;
+  }
+
+  .case-cta {
+    min-height: 2.45rem;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.92rem;
+  }
+
+  .case:hover .case-image {
+    transform: none;
+  }
+
+  .cases-drag-hint {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 0.15rem;
+    margin-top: 0.1rem;
+  }
+
+  .cases-drag-hint span {
+    position: relative;
+    display: inline-flex;
+    width: 3.4rem;
+    height: 1.8rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-accent);
+    box-shadow: 0 10px 28px rgba(10, 10, 10, 0.14);
+    animation: dragHint 1.35s var(--ease-out) infinite;
+  }
+
+  .cases-drag-hint span::before,
+  .cases-drag-hint span::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+  }
+
+  .cases-drag-hint span::before {
+    right: 0.82rem;
+    width: 1.55rem;
+    height: 3px;
+    border-radius: var(--radius-pill);
+    background-color: #fff;
+    transform: translateY(-50%);
+  }
+
+  .cases-drag-hint span::after {
+    right: 0.78rem;
+    width: 0.72rem;
+    height: 0.72rem;
+    border-top: 3px solid #fff;
+    border-right: 3px solid #fff;
+    background: transparent;
+    transform: translateY(-50%) rotate(45deg);
   }
 
   .section {
