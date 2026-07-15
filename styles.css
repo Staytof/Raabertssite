@@ -1,9 +1,3 @@
-/* =========================================================
-   Raaberts Softwares — Folha de estilos
-   Estética monocromática preto e branco, moderna e minimalista.
-   ========================================================= */
-
-/* ---------- Tokens de design ---------- */
 :root {
   /* Paleta monocromática */
   --color-bg: #ffffff;
@@ -75,6 +69,8 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-h) + 16px);
   -webkit-text-size-adjust: 100%;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 body {
@@ -87,12 +83,25 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.cursor-orb {
+  display: none;
 }
 
 img {
   max-width: 100%;
   height: auto;
   display: block;
+  -webkit-user-drag: none;
+  user-drag: none;
+  user-select: none;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
 ul,
@@ -871,6 +880,52 @@ p {
 
   45% {
     transform: translateX(0.45rem);
+  }
+}
+
+@keyframes orbDrift {
+  0% {
+    transform: translate3d(14vw, 18vh, 0) translate(-50%, -50%);
+  }
+
+  18% {
+    transform: translate3d(78vw, 24vh, 0) translate(-50%, -50%);
+  }
+
+  38% {
+    transform: translate3d(63vw, 82vh, 0) translate(-50%, -50%);
+  }
+
+  58% {
+    transform: translate3d(22vw, 68vh, 0) translate(-50%, -50%);
+  }
+
+  78% {
+    transform: translate3d(46vw, 36vh, 0) translate(-50%, -50%);
+  }
+
+  100% {
+    transform: translate3d(14vw, 18vh, 0) translate(-50%, -50%);
+  }
+}
+
+@media (min-width: 769px) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .cursor-orb {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    display: block;
+    width: clamp(18rem, 30vw, 34rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.24);
+    filter: blur(78px);
+    opacity: 1;
+    pointer-events: none;
+    transform: translate3d(-50%, -50%, 0);
+    animation: orbDrift 34s ease-in-out infinite;
+    will-change: transform;
   }
 }
 
