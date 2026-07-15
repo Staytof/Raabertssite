@@ -1,4 +1,3 @@
-
 function toggleMenu(header, menuToggle, mobileMenu) {
   const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
   menuToggle.setAttribute('aria-expanded', String(!isOpen));
@@ -90,6 +89,42 @@ function setupReveal() {
   targets.forEach((el) => observer.observe(el));
 }
 
+/** Bloqueia interações comuns de inspeção, seleção e arraste no site. */
+function setupInteractionLocks() {
+  document.querySelectorAll('img').forEach((image) => {
+    image.setAttribute('draggable', 'false');
+  });
+
+  ['contextmenu', 'dragstart', 'selectstart'].forEach((eventName) => {
+    document.addEventListener(
+      eventName,
+      (event) => {
+        event.preventDefault();
+      },
+      { capture: true }
+    );
+  });
+
+  document.addEventListener(
+    'keydown',
+    (event) => {
+      const key = event.key.toLowerCase();
+      const hasModifier = event.ctrlKey || event.metaKey;
+      const blockedShortcut =
+        event.key === 'F12' ||
+        (hasModifier && key === 'i') ||
+        (hasModifier && event.shiftKey && ['i', 'j', 'c'].includes(key)) ||
+        (hasModifier && ['u', 's'].includes(key));
+
+      if (!blockedShortcut) return;
+
+      event.preventDefault();
+      event.stopPropagation();
+    },
+    { capture: true }
+  );
+}
+
 /** Inicializa todas as interações após o DOM pronto. */
 function init() {
   const header = document.querySelector('.site-header');
@@ -109,6 +144,7 @@ function init() {
 
   if (menuToggle && mobileMenu) setupSmoothAnchors(menuToggle, mobileMenu);
   setupReveal();
+  setupInteractionLocks();
 }
 
 if (document.readyState === 'loading') {
