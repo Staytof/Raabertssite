@@ -1,3 +1,9 @@
+/* =========================================================
+   Raaberts Softwares — Folha de estilos
+   Estética monocromática preto e branco, moderna e minimalista.
+   ========================================================= */
+
+/* ---------- Tokens de design ---------- */
 :root {
   /* Paleta monocromática */
   --color-bg: #ffffff;
@@ -457,11 +463,8 @@ p {
   margin-bottom: var(--space-3);
 }
 
-.hero-title::after {
-  content: "|";
+.hero-question {
   display: inline-block;
-  margin-left: 0.08em;
-  font-weight: 400;
   animation: cursorBlink 900ms steps(1) infinite;
 }
 
