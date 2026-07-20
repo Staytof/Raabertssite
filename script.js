@@ -1,3 +1,10 @@
+/* =========================================================
+   Raaberts Softwares — Script de interação
+   Vanilla JS: menu mobile, sombra do header, animação de
+   entrada das seções e fechamento do menu ao navegar.
+   ========================================================= */
+
+/** Alterna o estado visual do menu mobile. */
 function toggleMenu(header, menuToggle, mobileMenu) {
   const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
   menuToggle.setAttribute('aria-expanded', String(!isOpen));
@@ -63,7 +70,7 @@ function setupSmoothAnchors(menuToggle, mobileMenu) {
 /** Anima a entrada das seções quando visíveis. */
 function setupReveal() {
   const targets = document.querySelectorAll(
-    '.hero-services li, .pillar, .case, .section-copy, .section-visual, .contact-flow li, .contato-card'
+    '.hero-services li, .pillar, .case, .plan-card, .section-copy, .section-visual, .contact-flow li, .contato-card'
   );
   if (!targets.length) return;
 
