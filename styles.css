@@ -1,3 +1,9 @@
+/* =========================================================
+   Raaberts Softwares — Folha de estilos
+   Estética monocromática preto e branco, moderna e minimalista.
+   ========================================================= */
+
+/* ---------- Tokens de design ---------- */
 :root {
   /* Paleta monocromática */
   --color-bg: #ffffff;
@@ -602,8 +608,9 @@ p {
 /* ---------- Cases ---------- */
 .cases {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 15rem));
   align-items: stretch;
+  justify-content: center;
   gap: var(--space-4);
 }
 
@@ -1125,7 +1132,7 @@ p {
   }
 
   .cases {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 15rem));
   }
 
   .plans-grid {
@@ -1178,6 +1185,7 @@ p {
     grid-template-columns: none;
     grid-auto-flow: column;
     grid-auto-columns: minmax(11.5rem, 66vw);
+    justify-content: start;
     gap: var(--space-3);
     margin-right: calc(var(--space-3) * -1);
     padding: 0 var(--space-3) 0.65rem 0;
